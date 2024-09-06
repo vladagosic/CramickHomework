@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -13,41 +14,45 @@ namespace CramickHomework.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatedById = table.Column<Guid>(type: "uniqueidentifier", maxLength: 450, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
+                    FullName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetime", nullable: false),
+                    CreatedById = table.Column<string>(type: "varchar(36)", nullable: false),
+                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false),
+                    NormalizedEmail = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "longtext", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "longtext", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetime", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -59,17 +64,18 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,17 +86,18 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,16 +108,17 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,14 +129,15 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,16 +154,17 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Value = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,36 +175,37 @@ namespace CramickHomework.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("6e0da5cf-14f0-4f25-8785-8715f608756b"), "2f205cfc-b54b-425b-8ae6-473a68c203f0", "User", null },
-                    { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), "e817d897-9a22-4e70-a356-a4aa6388a67b", "Administrator", null }
+                    { new Guid("6e0da5cf-14f0-4f25-8785-8715f608756b"), "f8835e4d-0b5f-4e38-825b-b10440daf469", "User", null },
+                    { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), "7b1ac459-4632-4491-b7cb-a838300f19ad", "Administrator", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedById", "CreatedOn", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"), 0, "f762d5e9-706b-4684-90f6-0c9cd96ca86e", new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"), new DateTimeOffset(new DateTime(2024, 9, 6, 13, 8, 14, 982, DateTimeKind.Unspecified).AddTicks(5040), new TimeSpan(0, 2, 0, 0, 0)), "cramickhomework@gmail.com", true, "SYSTEM", false, null, "CRAMICKHOMEWORK@GMAIL.COM", "2D7FD11C.1031.4086.9C4F.6FFACEBF2963", "AQAAAAIAAYagAAAAEKDmAaW94dX950N/SRqj6kGxG2B7r477NLylBAyU/P3bkazU0e13A/N+BcNp0gz3xg==", null, false, "364d3f52-b4a6-4f6f-87e1-6411b8caba20", false, "2d7fd11c.1031.4086.9c4f.6ffacebf2963" });
+                values: new object[] { "b59b00e0-d70e-499f-bfaf-dca40561fa65", 0, "b7f98d94-6fa8-47c7-9273-2b91b0357416", "b59b00e0-d70e-499f-bfaf-dca40561fa65", new DateTimeOffset(new DateTime(2024, 9, 6, 23, 26, 36, 843, DateTimeKind.Unspecified).AddTicks(1966), new TimeSpan(0, 2, 0, 0, 0)), "cramickhomework@gmail.com", true, "SYSTEM", false, null, "CRAMICKHOMEWORK@GMAIL.COM", "C38FF139.CDF3.47FE.ACD0.A1D15EE45469", "AQAAAAIAAYagAAAAEP7tqu3ho4+ODzdL8L3t6dNQ7VSDmK5Bz52FpdNFJFEOfao3BdeXJZ6PL4RhGroykA==", null, false, "8496fbf0-607e-4924-beb8-36a47a446b92", false, "c38ff139.cdf3.47fe.acd0.a1d15ee45469" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65") });
+                values: new object[] { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), "b59b00e0-d70e-499f-bfaf-dca40561fa65" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedById", "CreatedOn", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("c8d598de-6e02-482f-bea6-c7e0b0c6ea7c"), 0, "510a8047-7098-4cfd-85d7-86b0e0f092ea", new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"), new DateTimeOffset(new DateTime(2024, 9, 6, 13, 8, 15, 68, DateTimeKind.Unspecified).AddTicks(1599), new TimeSpan(0, 2, 0, 0, 0)), "cramick.homework@cramick-it.com", true, "Administrator", false, null, "CRAMICK.HOMEWORK@CRAMICK-IT.COM", "9BA93382.BA17.427B.A6D6.F493973319C1", "AQAAAAIAAYagAAAAEFgtD8ryjE/oxahWtDewEBB47CVEW5ZMWeDvbpkZ/DgyOqaPyxhyaTXOI8gJ2jAS5Q==", null, false, "5f43f193-0d06-4465-b4c3-2a37ec1e6c42", false, "9ba93382.ba17.427b.a6d6.f493973319c1" });
+                values: new object[] { "c8d598de-6e02-482f-bea6-c7e0b0c6ea7c", 0, "33cb3d2d-cc0e-4ce1-b26f-104d4a07e42f", "b59b00e0-d70e-499f-bfaf-dca40561fa65", new DateTimeOffset(new DateTime(2024, 9, 6, 23, 26, 36, 951, DateTimeKind.Unspecified).AddTicks(139), new TimeSpan(0, 2, 0, 0, 0)), "cramick.homework@cramick-it.com", true, "Administrator", false, null, "CRAMICK.HOMEWORK@CRAMICK-IT.COM", "9414AE0F.9177.4B34.B110.30821820CBBC", "AQAAAAIAAYagAAAAEOnkZajE/j/EQY0ppDmh7iE4rFrIduYoh7fdYmb2FhsBGbm5Qo+eSveusXxxuc3GIA==", null, false, "c347593b-60f1-4b0b-afb5-99553eddbc16", false, "9414ae0f.9177.4b34.b110.30821820cbbc" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), new Guid("c8d598de-6e02-482f-bea6-c7e0b0c6ea7c") });
+                values: new object[] { new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"), "c8d598de-6e02-482f-bea6-c7e0b0c6ea7c" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -205,8 +216,7 @@ namespace CramickHomework.Infrastructure.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -237,8 +247,7 @@ namespace CramickHomework.Infrastructure.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
         }
 
         /// <inheritdoc />

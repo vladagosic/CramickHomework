@@ -10,6 +10,14 @@ namespace CramickHomework.Infrastructure.Persistence.Configuration
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
 		{
 			builder
+				.Property(e => e.Id)
+				.IsRequired()
+				.HasMaxLength(36)
+				.HasConversion(
+					x => x.ToString(),
+					x => Guid.Parse(x));
+
+			builder
 				.Property(x => x.FullName)
 				.IsRequired()
 				.HasMaxLength(Constants.User.FullNameLength);
@@ -22,7 +30,9 @@ namespace CramickHomework.Infrastructure.Persistence.Configuration
 			builder
 				.Property(x => x.CreatedById)
 				.IsRequired()
-				.HasMaxLength(450);
+				.HasConversion(
+					x => x.ToString(),
+					x => Guid.Parse(x));
 
 			builder
 				.HasMany(x => x.UsersCreated)

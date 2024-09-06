@@ -3,7 +3,6 @@ using System;
 using CramickHomework.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -17,76 +16,75 @@ namespace CramickHomework.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("CramickHomework.Application.Features.Users.Domain.ApplicationUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
-                    b.Property<Guid>("CreatedById")
-                        .HasMaxLength(450)
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("CreatedById")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -97,49 +95,48 @@ namespace CramickHomework.Infrastructure.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"),
+                            Id = "b59b00e0-d70e-499f-bfaf-dca40561fa65",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f762d5e9-706b-4684-90f6-0c9cd96ca86e",
-                            CreatedById = new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"),
-                            CreatedOn = new DateTimeOffset(new DateTime(2024, 9, 6, 13, 8, 14, 982, DateTimeKind.Unspecified).AddTicks(5040), new TimeSpan(0, 2, 0, 0, 0)),
+                            ConcurrencyStamp = "b7f98d94-6fa8-47c7-9273-2b91b0357416",
+                            CreatedById = "b59b00e0-d70e-499f-bfaf-dca40561fa65",
+                            CreatedOn = new DateTimeOffset(new DateTime(2024, 9, 6, 23, 26, 36, 843, DateTimeKind.Unspecified).AddTicks(1966), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "cramickhomework@gmail.com",
                             EmailConfirmed = true,
                             FullName = "SYSTEM",
                             LockoutEnabled = false,
                             NormalizedEmail = "CRAMICKHOMEWORK@GMAIL.COM",
-                            NormalizedUserName = "2D7FD11C.1031.4086.9C4F.6FFACEBF2963",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKDmAaW94dX950N/SRqj6kGxG2B7r477NLylBAyU/P3bkazU0e13A/N+BcNp0gz3xg==",
+                            NormalizedUserName = "C38FF139.CDF3.47FE.ACD0.A1D15EE45469",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP7tqu3ho4+ODzdL8L3t6dNQ7VSDmK5Bz52FpdNFJFEOfao3BdeXJZ6PL4RhGroykA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "364d3f52-b4a6-4f6f-87e1-6411b8caba20",
+                            SecurityStamp = "8496fbf0-607e-4924-beb8-36a47a446b92",
                             TwoFactorEnabled = false,
-                            UserName = "2d7fd11c.1031.4086.9c4f.6ffacebf2963"
+                            UserName = "c38ff139.cdf3.47fe.acd0.a1d15ee45469"
                         },
                         new
                         {
-                            Id = new Guid("c8d598de-6e02-482f-bea6-c7e0b0c6ea7c"),
+                            Id = "c8d598de-6e02-482f-bea6-c7e0b0c6ea7c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "510a8047-7098-4cfd-85d7-86b0e0f092ea",
-                            CreatedById = new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"),
-                            CreatedOn = new DateTimeOffset(new DateTime(2024, 9, 6, 13, 8, 15, 68, DateTimeKind.Unspecified).AddTicks(1599), new TimeSpan(0, 2, 0, 0, 0)),
+                            ConcurrencyStamp = "33cb3d2d-cc0e-4ce1-b26f-104d4a07e42f",
+                            CreatedById = "b59b00e0-d70e-499f-bfaf-dca40561fa65",
+                            CreatedOn = new DateTimeOffset(new DateTime(2024, 9, 6, 23, 26, 36, 951, DateTimeKind.Unspecified).AddTicks(139), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "cramick.homework@cramick-it.com",
                             EmailConfirmed = true,
                             FullName = "Administrator",
                             LockoutEnabled = false,
                             NormalizedEmail = "CRAMICK.HOMEWORK@CRAMICK-IT.COM",
-                            NormalizedUserName = "9BA93382.BA17.427B.A6D6.F493973319C1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFgtD8ryjE/oxahWtDewEBB47CVEW5ZMWeDvbpkZ/DgyOqaPyxhyaTXOI8gJ2jAS5Q==",
+                            NormalizedUserName = "9414AE0F.9177.4B34.B110.30821820CBBC",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOnkZajE/j/EQY0ppDmh7iE4rFrIduYoh7fdYmb2FhsBGbm5Qo+eSveusXxxuc3GIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f43f193-0d06-4465-b4c3-2a37ec1e6c42",
+                            SecurityStamp = "c347593b-60f1-4b0b-afb5-99553eddbc16",
                             TwoFactorEnabled = false,
-                            UserName = "9ba93382.ba17.427b.a6d6.f493973319c1"
+                            UserName = "9414ae0f.9177.4b34.b110.30821820cbbc"
                         });
                 });
 
@@ -147,26 +144,25 @@ namespace CramickHomework.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
 
@@ -174,13 +170,13 @@ namespace CramickHomework.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8"),
-                            ConcurrencyStamp = "e817d897-9a22-4e70-a356-a4aa6388a67b",
+                            ConcurrencyStamp = "7b1ac459-4632-4491-b7cb-a838300f19ad",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = new Guid("6e0da5cf-14f0-4f25-8785-8715f608756b"),
-                            ConcurrencyStamp = "2f205cfc-b54b-425b-8ae6-473a68c203f0",
+                            ConcurrencyStamp = "f8835e4d-0b5f-4e38-825b-b10440daf469",
                             Name = "User"
                         });
                 });
@@ -191,16 +187,14 @@ namespace CramickHomework.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -215,16 +209,15 @@ namespace CramickHomework.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -236,16 +229,17 @@ namespace CramickHomework.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -256,11 +250,11 @@ namespace CramickHomework.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -271,29 +265,29 @@ namespace CramickHomework.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("b59b00e0-d70e-499f-bfaf-dca40561fa65"),
+                            UserId = "b59b00e0-d70e-499f-bfaf-dca40561fa65",
                             RoleId = new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8")
                         },
                         new
                         {
-                            UserId = new Guid("c8d598de-6e02-482f-bea6-c7e0b0c6ea7c"),
+                            UserId = "c8d598de-6e02-482f-bea6-c7e0b0c6ea7c",
                             RoleId = new Guid("b920cbd7-d17e-44b0-82c9-89c7ed51d7a8")
                         });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 

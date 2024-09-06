@@ -54,9 +54,7 @@ namespace CramickHomework.Infrastructure.Autofac
 				.UseLoggerFactory(loggerFactory)
 				.EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled);
 
-			optionsBuilder.UseSqlServer(
-				configuration.GetConnectionString("DefaultConnection"),
-				sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
+			optionsBuilder.UseMySQL(configuration.GetConnectionString("DefaultConnection")!);
 
 			return optionsBuilder.Options;
 		}

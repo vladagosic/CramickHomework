@@ -11,19 +11,24 @@
 - Get list of all Users in paged and sortable table
 - Create new User
 - View Profile of the currently logged in user
+- Get list of Contacts in paged and sortable table
+- Create new Contact
+- Update Contact
+- Delete Contact
  
 ## Dependencies
 For Backend only non Microsoft libraries are listed:
 
-- Autofac 9.0
+- Autofac 10.0.0
 - AutoMapper 13.0.1
 - Ben.Demystifier 0.4.1
 - FluentValidation 11.9.1
 - MediatR 12.2.0
-- NSwag.AspNetCore 14.0.7
+- MySql.EntityFrameworkCore 8.0.5
+- NSwag.AspNetCore 14.1.0
 - SendGrid 9.29.3
-- Serilog.AspNetCore 8.0.1
-- Swashbuckle.AspNetCore 6.6.1
+- Serilog.AspNetCore 8.0.2
+- Swashbuckle.AspNetCore 6.7.3
  
 For Frontend only non Angular libraries are listed:
 
@@ -87,6 +92,15 @@ Go to the **.\src\CramickHomework.Infrastructure** directory and execute:
 dotnet ef database update
 ```
 After that you can delete the **Administrator** section in the **appsettings.json** of the **CramickHomework.Server** project.
+You can use Administrator credentials to log in or register a new account using your email.
+```json
+"Administrator": {
+    "Id": "c8d598de-6e02-482f-bea6-c7e0b0c6ea7c",
+    "Name": "Administrator",
+    "Email": "cramick.homework@cramick-it.com",
+    "Password": "$up3RseCr37pwd!"
+}
+```
 
 You can configure the Microsoft Identity options in the following section of **appsettings.json**:
 ```json

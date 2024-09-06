@@ -19,7 +19,7 @@ namespace CramickHomework.Infrastructure.Migrations
 		private static ApplicationDbContext CreateDbContext(string connectionString)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-			optionsBuilder.UseSqlServer(connectionString);
+			optionsBuilder.UseMySQL(connectionString);
 
 			return 
 				new ApplicationDbContext(

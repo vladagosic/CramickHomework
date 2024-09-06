@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using CramickHomework.Application.Data.Queries;
 using CramickHomework.Application.Data.Responses;
 using CramickHomework.Application.Data.Sorting;
 using CramickHomework.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CramickHomework.Application.Extensions
 {
@@ -138,7 +137,7 @@ namespace CramickHomework.Application.Extensions
 			string sortField,
 			bool sortDescending = false)
 		{
-			if (sortField.IsNullOrEmpty())
+			if (string.IsNullOrEmpty(sortField))
 				return query;
 
 			var propertyInfo = typeof(T)
