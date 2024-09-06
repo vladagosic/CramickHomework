@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\cramick-homework.client\cramick-homework.client.esproj" />
     <ProjectReference Include="..\CramickHomework.Infrastructure\CramickHomework.Infrastructure.csproj" />
   </ItemGroup>

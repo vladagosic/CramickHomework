@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using CramickHomework.Application.Helpers;
 using CramickHomework.Domain.Interfaces;
+using CramickHomework.Application.Interfaces;
+using CramickHomework.Application.Features.Contacts.Domain;
 
 namespace CramickHomework.Application.Features.Users.Domain
 {
-	public class ApplicationUser : IdentityUser<Guid>, IHasCreatedByUser<Guid>, IEntity<Guid>
+    public class ApplicationUser : IdentityUser<Guid>, IHasCreatedByUser<Guid>, IEntity<Guid>
 	{
         public ApplicationUser() : base() 
 		{ 
@@ -23,6 +25,8 @@ namespace CramickHomework.Application.Features.Users.Domain
 		public Guid CreatedById { get; private set; } = default!;
 		public ApplicationUser CreatedBy { get; } = default!;
 		public ICollection<ApplicationUser> UsersCreated { get; private set; } = [];
+		public ICollection<Contact> ContactsCreated { get; private set; } = [];
+		public ICollection<Contact> ContactsUpdated { get; private set; } = [];
 
 		public void SetCreated(DateTimeOffset createdOn, Guid createdById)
 		{

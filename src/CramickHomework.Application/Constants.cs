@@ -30,6 +30,7 @@
 		{
 			public static int FullNameLength => 256;
 			public static int EmailLength => 256;
+			public static int PhoneLength => 20;
 		}
 
 		public static class Environment
