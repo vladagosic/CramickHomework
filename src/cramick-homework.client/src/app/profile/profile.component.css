@@ -1,0 +1,8 @@
+.profile-card {
+    width: 35rem;
+    padding: 2rem;
+    margin-top: 10rem;
+}
+.profile-card table tr td label {
+    font-size: 0.9em;
+}

@@ -1,0 +1,17 @@
+Run this from Package Manager Console. 
+
+// add migration (change TODO to the name of your migration)
+Add-Migration -Project CramickHomework.Infrastructure -StartUpProject CramickHomework.Infrastructure -Context ApplicationDbContext -Name TODO
+
+// remove migration
+Remove-Migration -Project CramickHomework.Infrastructure -StartUpProject CramickHomework.Infrastructure -Context ApplicationDbContext
+
+// update database
+Update-Database -Project CramickHomework.Infrastructure -StartUpProject CramickHomework.Infrastructure -Context ApplicationDbContext
+
+
+// Set 'DbConnectionString' variable by running the following command to the appropriate connection string if you want to use different database than configured in appsettings.json
+$env:DbConnectionString='{YOUR_CONNECTION_STRING}'
+
+// Set ASPNETCORE_ENVIRONMENT variable to the appropriate Environment you want to update ('Development' or 'Production') by running following command in PM console:
+$env:ASPNETCORE_ENVIRONMENT='Production'

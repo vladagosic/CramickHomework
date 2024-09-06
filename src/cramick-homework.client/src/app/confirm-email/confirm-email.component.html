@@ -1,0 +1,26 @@
+<div class="card mx-auto confirmation-card">
+
+    <div class="confirmation-content">
+        @if (!isConfirmation) {
+        <span>An email has been sent to your address.<br /> Please use the link in it to confirm your email.</span>
+        }
+        
+        @if (isConfirmation && isSuccess) {
+        <span>Thank you for confirming your email address.</span>
+        }
+        
+        @if (isConfirmation && !isSuccess) {
+        <span>Email confirmation was unsuccessfull.<br /> Use the resend confirmation email link or try again
+            later.</span>
+        }
+    </div>
+
+    <div class="confirmation-footer">
+        @if (!isSuccess) {
+        <button class="btn" (click)="resendConfirmationEmail()">Resend confirmation email</button>
+        }
+        @if (!isLoggedIn && isConfirmation && isSuccess) {
+        <button class="btn" [routerLink]="['/login']">Go to Login</button>
+        }
+    </div>
+</div>

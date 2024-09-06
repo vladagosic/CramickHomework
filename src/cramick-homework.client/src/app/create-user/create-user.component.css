@@ -1,0 +1,17 @@
+.create-user-form {
+    width: 35rem;
+    padding: 2rem;
+    margin-top: 10rem;
+}
+
+.form-footer {
+    margin-top: 1rem;    
+}
+.form-footer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reset-btn {
+    margin-left: 1rem;
+}

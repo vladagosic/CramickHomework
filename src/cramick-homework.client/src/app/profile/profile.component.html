@@ -1,0 +1,49 @@
+<div class="card mx-auto profile-card">
+    <table>
+        <tr>
+            <td>
+                <label>Full Name</label>
+            </td>
+            <td>
+                <span>{{ user.fullName }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email</label>
+            </td>
+            <td>
+                <span>{{ user.email }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email Confirmed</label>
+            </td>
+            <td>
+                @if (user.emailConfirmed) {
+                <i class="bi bi-check-circle-fill" style="color: green;"></i>
+                }
+                @if (!user.emailConfirmed) {
+                <i class="bi bi-x-circle-fill" style="color: red;"></i>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Created By</label>
+            </td>
+            <td>
+                <span>{{ user.createdBy }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Created On</label>
+            </td>
+            <td>
+                <span>{{ user.createdOn | date }}</span>
+            </td>
+        </tr>
+    </table>
+</div>

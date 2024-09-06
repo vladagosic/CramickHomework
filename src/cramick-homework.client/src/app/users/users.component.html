@@ -1,0 +1,44 @@
+<div style="padding: 2rem;">
+    <div>
+        <button type="button" class="btn btn-primary" [routerLink]="['/create-user']">Create User</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" sortable="fullName" (sort)="onSort($event)">Full Name</th>
+                <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+                <th scope="col" sortable="emailConfirmed" (sort)="onSort($event)">Email Confirmed</th>
+                <th scope="col" sortable="createdBy" (sort)="onSort($event)">Created By</th>
+                <th scope="col" sortable="createdOn" (sort)="onSort($event)">Created On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track user.id) {
+            <tr>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    @if (user.emailConfirmed) {
+                        <i class="bi bi-check-circle-fill" style="color: green;"></i>
+                    }
+                    @if (!user.emailConfirmed) {
+                        <i class="bi bi-x-circle-fill" style="color: red;"></i>
+                    }
+                </td>
+                <td>{{ user.createdBy }}</td>
+                <td>{{ user.createdOn | date }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadUsers()">
+        </ngb-pagination>
+
+        <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadUsers()">
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="50">50 items per page</option>
+        </select>
+    </div>
+</div>
