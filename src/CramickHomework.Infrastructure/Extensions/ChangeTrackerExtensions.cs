@@ -11,10 +11,21 @@ namespace CramickHomework.Infrastructure.Extensions
 				.GetAddedEntitiesWhichImplement<IHasCreated>()
 				.ToList();
 
+		public static List<EntityEntry<IEntity>> GetChangedEntitiesWithUpdated(this ChangeTracker changeTracker) =>
+			changeTracker
+				.GetChangedEntitiesWhichImplement<IHasUpdated>()
+				.ToList();
+
 		private static List<EntityEntry<IEntity>> GetAddedEntitiesWhichImplement<T>(this ChangeTracker changeTracker) =>
 		   changeTracker
 			   .Entries<IEntity>()
 			   .Where(x => (x.State == EntityState.Added) && x.Entity is T)
+			   .ToList();
+
+		private static List<EntityEntry<IEntity>> GetChangedEntitiesWhichImplement<T>(this ChangeTracker changeTracker) =>
+		   changeTracker
+			   .Entries<IEntity>()
+			   .Where(x => (x.State == EntityState.Modified) && x.Entity is T)
 			   .ToList();
 	}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',

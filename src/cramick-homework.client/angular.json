@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Cramickhomework.client": {
+    "cramickhomework.client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/Cramickhomework.client",
+            "outputPath": "dist/cramickhomework.client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Cramickhomework.client:build:production"
+              "buildTarget": "cramickhomework.client:build:production"
             },
             "development": {
-              "buildTarget": "Cramickhomework.client:build:development"
+              "buildTarget": "cramickhomework.client:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Cramickhomework.client:build"
+            "buildTarget": "cramickhomework.client:build"
           }
         },
         "test": {

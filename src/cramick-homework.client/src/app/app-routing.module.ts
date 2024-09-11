@@ -9,6 +9,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UsersComponent } from './users/users.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 const routes: Routes = [
   { path: '', component: DefaultComponent, canActivate: [AuthGuard] },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard]}
+  { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard]},
+  { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard]}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

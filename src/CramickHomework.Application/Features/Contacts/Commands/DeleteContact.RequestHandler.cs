@@ -1,5 +1,6 @@
 ﻿using CramickHomework.Application.Data.Interfaces;
 using CramickHomework.Application.Features.Contacts.Domain;
+using CramickHomework.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,14 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 	{
 		public class RequestHandler : IRequestHandler<Request, Unit>
 		{
+			private readonly IUnitOfWork _unitOfWork;
 			private readonly IRepository<Contact, Guid> _repository;
 
-			public RequestHandler(IRepository<Contact, Guid> repository)
+			public RequestHandler(
+				IUnitOfWork unitOfWork,
+				IRepository<Contact, Guid> repository)
 			{
+				_unitOfWork = unitOfWork;
 				_repository = repository;
 			}
 
@@ -22,6 +27,8 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 						?? throw new ArgumentException($"No Contact with Id: {request.Id}");
 
 				_repository.Delete(contact);
+
+				await _unitOfWork.SaveChangesAsync();
 
 				return Unit.Value;
 			}

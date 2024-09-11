@@ -63,6 +63,14 @@ namespace CramickHomework.Infrastructure.Persistence
 					var createdEntity = (IHasCreated)entity.Entity;
 					createdEntity.SetCreated(DateTimeOffset.Now, userId);
 				});
+
+			ChangeTracker
+				.GetChangedEntitiesWithUpdated()
+				.ForEach(entity =>
+				{
+					var createdEntity = (IHasUpdated)entity.Entity;
+					createdEntity.SetUpdated(DateTimeOffset.Now, userId);
+				});
 		}
 	}
 }

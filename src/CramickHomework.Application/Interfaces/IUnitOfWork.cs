@@ -1,4 +1,4 @@
-﻿namespace CramickHomework.Infrastructure.Persistence
+﻿namespace CramickHomework.Application.Interfaces
 {
 	public interface IUnitOfWork
 	{

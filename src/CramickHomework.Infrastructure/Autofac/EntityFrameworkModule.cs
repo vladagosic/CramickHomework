@@ -10,6 +10,7 @@ using CramickHomework.Infrastructure.Persistence;
 using CramickHomework.Infrastructure.Persistence.Options;
 using System.Reflection;
 using Module = Autofac.Module;
+using CramickHomework.Application.Interfaces;
 
 namespace CramickHomework.Infrastructure.Autofac
 {

@@ -1,0 +1,27 @@
+.action {
+    margin: 0.1rem;
+    vertical-align: bottom;
+    padding-left: 1rem;
+}
+
+.action i {
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: table-cell;
+    padding-left: 0.5rem;
+}
+
+
+.form-footer {
+    margin-top: 1rem;    
+}
+.form-footer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-footer i {
+    padding-left: 0.5rem;
+    cursor: pointer;
+    font-size: 2rem;
+}

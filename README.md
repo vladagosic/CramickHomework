@@ -22,8 +22,8 @@ For Backend only non Microsoft libraries are listed:
 - Autofac 10.0.0
 - AutoMapper 13.0.1
 - Ben.Demystifier 0.4.1
-- FluentValidation 11.9.1
-- MediatR 12.2.0
+- FluentValidation 11.9.2
+- MediatR 12.4.1
 - MySql.EntityFrameworkCore 8.0.5
 - NSwag.AspNetCore 14.1.0
 - SendGrid 9.29.3
@@ -54,11 +54,11 @@ No other installations of libraries are necessary since the startup scripts will
 
 ## Setup and Configuration
 All configuration is done in CramickHomework.Server **appsettings.json**
-First you need to configure the connection string for the SQL Server in **DefaultConnection**
+First you need to configure the connection string for the MySQL Server database in **DefaultConnection**
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Data Source=.;Initial Catalog=CramickHomework;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=True"
+  "DefaultConnection": "server=[YOUR-SERVER];uid=[YOUR-USER];pwd=[YOUR_PASSWORD];database=[YOUR_DATABASE]"
 }
 ```
 

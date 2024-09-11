@@ -61,8 +61,8 @@
 
 		public static class Email
 		{
-			public static string FromEmail => "cramickhomework@gmail.com";
-			public static string FromName => "CramickHomework No-Reply";
+			public static string FromEmail => "playawardshomework@gmail.com";
+			public static string FromName => "Homework No-Reply";
 		}
 	}
 }

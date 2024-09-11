@@ -3,6 +3,7 @@ using CramickHomework.Application.Data.Interfaces;
 using CramickHomework.Application.Data.Responses;
 using CramickHomework.Application.Features.Contacts.Domain;
 using CramickHomework.Application.Features.Contacts.Queries;
+using CramickHomework.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +13,16 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 	{
 		public class RequestHandler : IRequestHandler<Request, CreateUpdateResult<GetContacts.ContactModel>>
 		{
+			private readonly IUnitOfWork _unitOfWork;
 			private readonly IRepository<Contact, Guid> _repository;
 			private readonly IMapper _mapper;
 
 			public RequestHandler(
+				IUnitOfWork unitOfWork,
 				IRepository<Contact, Guid> repository,
 				IMapper mapper) 
 			{
+				_unitOfWork = unitOfWork;
 				_repository = repository;
 				_mapper = mapper;
 			}
@@ -34,6 +38,8 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 
 					contact.Update(request.Name, request.Phone);
 
+					await _unitOfWork.SaveChangesAsync();
+
 					return 
 						CreateUpdateResult<GetContacts.ContactModel>.Updated(
 							_mapper.Map<Contact, GetContacts.ContactModel>(contact));
@@ -43,6 +49,8 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 					contact = Contact.Create(request.Name, request.Phone);
 
 					_repository.Add(contact);
+					
+					await _unitOfWork.SaveChangesAsync();					
 
 					return
 						CreateUpdateResult<GetContacts.ContactModel>.Created(

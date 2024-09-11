@@ -23,8 +23,6 @@ namespace CramickHomework.Application.Features.Contacts.Commands
 					.MaximumLength(Constants.User.FullNameLength);
 
 				RuleFor(x => x.Phone)
-					.EmailAddress()
-					.NotEmpty()
 					.MaximumLength(Constants.User.PhoneLength);
 			}
 		}

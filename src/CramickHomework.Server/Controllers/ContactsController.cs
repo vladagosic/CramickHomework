@@ -1,8 +1,8 @@
 ﻿using CramickHomework.Application.Data.Responses;
-using Microsoft.AspNetCore.Mvc;
+using CramickHomework.Application.Features.Contacts.Commands;
 using CramickHomework.Application.Features.Contacts.Queries;
 using CramickHomework.Infrastructure.Extensions;
-using CramickHomework.Application.Features.Contacts.Commands;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CramickHomework.Server.Controllers
 {

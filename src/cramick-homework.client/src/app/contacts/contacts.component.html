@@ -1,0 +1,95 @@
+<div style="padding: 2rem;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                <th scope="col" sortable="phone" (sort)="onSort($event)">Phone</th>
+                <th scope="col" sortable="createdBy" (sort)="onSort($event)">Created By</th>
+                <th scope="col" sortable="createdOn" (sort)="onSort($event)">Created On</th>
+                <th scope="col" sortable="updatedBy" (sort)="onSort($event)">Updated By</th>
+                <th scope="col" sortable="updatedOn" (sort)="onSort($event)">Updated On</th>
+                <th scope="col" class="action">
+                    <i title="Add" class="bi bi-plus-circle" (click)="add(content)"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (contact of contacts; track contact.id) {
+            <tr>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.createdBy }}</td>
+                <td><span [title]="contact.createdOn | date: 'long'">{{ contact.createdOn | date }}</span></td>
+                <td>{{ contact.updatedBy }}</td>
+                <td><span [title]="contact.updatedOn | date: 'long'">{{ contact.updatedOn | date }}</span></td>
+                <td class="action">
+                    <div>
+                        <i title="Edit" class="bi bi-pencil-square" (click)="edit(content, contact)"></i>
+                        <i title="Delete" class="bi bi-file-x" (click)="delete(contact)"></i>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadContacts()">
+        </ngb-pagination>
+
+        <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadContacts()">
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="50">50 items per page</option>
+        </select>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            @if (contact.id) {
+            Edit Contact
+            }
+            @if (!contact.id) {
+            Add Contact
+            }
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="contactForm">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                @if (submitted && f['name'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['name'].errors['required']) {
+                    <div>Name is required</div>
+                    }
+                    @if (f['name'].errors['maxlength']) {
+                    <div>Name is longer than 256 characters.</div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" formControlName="phone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" />
+                @if (submitted && f['phone'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['phone'].errors['maxlength']) {
+                    <div>Phone is longer than 20 characters.</div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="form-group form-footer">
+                <div>
+                    <i title="Save" class="bi bi-check-circle" (click)="save()"></i>
+                    <i title="Cancel" class="bi bi-x-circle" (click)="cancel()"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

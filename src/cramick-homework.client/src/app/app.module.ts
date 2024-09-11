@@ -19,6 +19,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideToastr } from 'ngx-toastr';
 import { UsersComponent } from './users/users.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { UsersComponent } from './users/users.component';
     ConfirmEmailComponent,
     NavbarComponent,
     ProfileComponent,
-    CreateUserComponent
+    CreateUserComponent,    
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { UsersComponent } from './users/users.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    UsersComponent
+    UsersComponent,    
+    ContactsComponent,
   ],
   providers: [
     ApiClient,
